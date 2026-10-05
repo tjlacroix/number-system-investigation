@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number System Investigation</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f7fafc;
+      color: #17324d;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: #164f78;
+      margin-bottom: 8px;
+    }
+
+    .directions {
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
+
+    .progress {
+      font-size: 14px;
+      font-weight: bold;
+      color: #5d6b78;
+      margin-bottom: 8px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: #dce6ec;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #43b7c7;
+      width: 0%;
+      transition: width .3s ease;
+    }
+
+    .number-card {
+      background: white;
+      border: 2px solid #d8e3e9;
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .small-heading {
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: #6a7782;
+      font-weight: bold;
+    }
+
+    .number {
+      font-size: 54px;
+      font-weight: bold;
+      margin: 16px 0;
+      color: #164f78;
+    }
+
+    .prompt {
+      color: #5d6b78;
+    }
+
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .choice {
+      background: white;
+      border: 2px solid #d8e3e9;
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .choice:hover {
+      border-color: #43b7c7;
+    }
+
+    .choice input {
+      width: 19px;
+      height: 19px;
+      cursor: pointer;
+    }
+
+    button {
+      background: #164f78;
+      color: white;
+      border: none;
+      border-radius: 9px;
+      padding: 13px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #103d5e;
+    }
+
+    .secondary {
+      background: #e7f3f5;
+      color: #164f78;
+    }
+
+    .feedback {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: white;
+      border: 2px solid #d8e3e9;
+      line-height: 1.5;
+    }
+
+    .incorrect {
+      border-color: #e3a548;
+      background: #fffaf1;
+    }
+
+    .correct {
+      border-color: #43b7c7;
+      background: #f0fbfc;
+    }
+
+    .classification-chain {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin: 16px 0 20px;
+    }
+
+    .classification {
+      background: white;
+      border: 1px solid #a9c9d0;
+      border-radius: 8px;
+      padding: 8px 11px;
+      font-weight: bold;
+    }
+
+    .arrow {
+      color: #60727c;
+      font-weight: bold;
+    }
+
+    .plc {
+      margin-top: 16px;
+      padding: 16px;
+      background: #e9f8fa;
+      border-left: 5px solid #43b7c7;
+      font-size: 17px;
+      font-weight: bold;
+      line-height: 1.5;
+    }
+
+    .final {
+      background: white;
+      border: 2px solid #43b7c7;
+      border-radius: 16px;
+      padding: 28px;
+      margin-top: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 650px) {
+      body {
+        padding: 14px;
+      }
+
+      .choices {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .number {
+        font-size: 44px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Number System Investigation</h1>
+
+  <div class="directions">
+    For each number, select <strong>all number sets</strong> to which you
+    think it belongs. Check your thinking and revise your choices as needed.
+    Once your PLC has correctly classified the number, pause to discuss what
+    the example helps you notice about the number system before moving on.
+  </div>
+
+  <div id="activity">
+
+    <div class="progress" id="progressText"></div>
+
+    <div class="progress-track">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="number-card">
+
+      <div class="small-heading">
+        Explore this number
+      </div>
+
+      <div class="number" id="numberDisplay"></div>
+
+      <div class="prompt">
+        Which number sets contain this number? Select all that apply.
+      </div>
+
+    </div>
+
+    <div class="choices" id="choices"></div>
+
+    <button id="checkButton" onclick="checkAnswer()">
+      Check My Thinking
+    </button>
+
+    <div id="feedback" class="feedback hidden"></div>
+
+  </div>
+
+
+  <div id="finalScreen" class="final hidden">
+
+    <h2>Talk with Your PLC</h2>
+
+    <p style="font-size:20px; line-height:1.5;">
+      <strong>
+        Talk with your PLC about the patterns this activity helped you explore.
+        What are you noticing about the number system?
+      </strong>
+    </p>
+
+    <p>
+      Be ready to share what your group notices with the class.
+    </p>
+
+    <button class="secondary" onclick="restartActivity()">
+      Explore the Numbers Again
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+const sets = [
+  "Natural",
+  "Whole",
+  "Integer",
+  "Rational",
+  "Irrational",
+  "Real",
+  "Pure Imaginary",
+  "Imaginary",
+  "Complex"
+];
+
+
+const questions = [
+
+  {
+    number: "7",
+    answers: [
+      "Natural",
+      "Whole",
+      "Integer",
+      "Rational",
+      "Real",
+      "Complex"
+    ]
+  },
+
+  {
+    number: "0",
+    answers: [
+      "Whole",
+      "Integer",
+      "Rational",
+      "Real",
+      "Complex"
+    ]
+  },
+
+  {
+    number: "−4",
+    answers: [
+      "Integer",
+      "Rational",
+      "Real",
+      "Complex"
+    ]
+  },
+
+  {
+    number: "3/5",
+    answers: [
+      "Rational",
+      "Real",
+      "Complex"
+    ]
+  },
+
+  {
+    number: "0.75",
+    answers: [
+      "Rational",
+      "Real",
+      "Complex"
+    ]
+  },
+
+  {
+    number: "0.666…",
+    answers: [
+      "Rational",
+      "Real",
+      "Complex"
+    ]
+  },
+
+  {
+    number: "√49",
+    answers: [
+      "Natural",
+      "Whole",
+      "Integer",
+      "Rational",
+      "Real",
+      "Complex"
+    ]
+  },
+
+  {
+    number: "√2",
+    answers: [
+      "Irrational",
+      "Real",
+      "Complex"
+    ]
+  },
+
+  {
+    number: "π",
+    answers: [
+      "Irrational",
+      "Real",
+      "Complex"
+    ]
+  },
+
+  {
+    number: "−√25",
+    answers: [
+      "Integer",
+      "Rational",
+      "Real",
+      "Complex"
+    ]
+  },
+
+  {
+    number: "√−9",
+    answers: [
+      "Pure Imaginary",
+      "Imaginary",
+      "Complex"
+    ]
+  },
+
+  {
+    number: "−5i",
+    answers: [
+      "Pure Imaginary",
+      "Imaginary",
+      "Complex"
+    ]
+  },
+
+  {
+    number: "3 + 2i",
+    answers: [
+      "Imaginary",
+      "Complex"
+    ]
+  },
+
+  {
+    number: "4 + 0i",
+    answers: [
+      "Natural",
+      "Whole",
+      "Integer",
+      "Rational",
+      "Real",
+      "Complex"
+    ]
+  },
+
+  {
+    number: "−2.5",
+    answers: [
+      "Rational",
+      "Real",
+      "Complex"
+    ]
+  }
+
+];
+
+
+let order = [];
+let current = 0;
+let solved = false;
+
+
+function shuffleQuestions() {
+
+  order = [...questions];
+
+  for (let i = order.length - 1; i > 0; i--) {
+
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [order[i], order[j]] =
+      [order[j], order[i]];
+
+  }
+
+}
+
+
+function buildChoices() {
+
+  const container =
+    document.getElementById("choices");
+
+  container.innerHTML = "";
+
+  sets.forEach(set => {
+
+    const label =
+      document.createElement("label");
+
+    label.className = "choice";
+
+
+    const checkbox =
+      document.createElement("input");
+
+    checkbox.type = "checkbox";
+    checkbox.value = set;
+
+
+    const text =
+      document.createElement("span");
+
+    text.textContent = set;
+
+
+    label.appendChild(checkbox);
+    label.appendChild(text);
+
+    container.appendChild(label);
+
+  });
+
+}
+
+
+function showQuestion() {
+
+  solved = false;
+
+  const q = order[current];
+
+
+  document.getElementById(
+    "numberDisplay"
+  ).textContent = q.number;
+
+
+  document.getElementById(
+    "progressText"
+  ).textContent =
+    "Number " +
+    (current + 1) +
+    " of " +
+    order.length;
+
+
+  document.getElementById(
+    "progressBar"
+  ).style.width =
+    ((current + 1) /
+      order.length *
+      100) +
+    "%";
+
+
+  document.getElementById(
+    "feedback"
+  ).className =
+    "feedback hidden";
+
+
+  document.getElementById(
+    "feedback"
+  ).innerHTML = "";
+
+
+  document.getElementById(
+    "checkButton"
+  ).classList.remove("hidden");
+
+
+  buildChoices();
+
+}
+
+
+function sameSets(selected, correct) {
+
+  return (
+    selected.length === correct.length &&
+    selected.every(
+      item => correct.includes(item)
+    )
+  );
+
+}
+
+
+function checkAnswer() {
+
+  if (solved) return;
+
+
+  const q = order[current];
+
+
+  const selected =
+    Array.from(
+      document.querySelectorAll(
+        "#choices input:checked"
+      )
+    ).map(
+      input => input.value
+    );
+
+
+  const feedback =
+    document.getElementById(
+      "feedback"
+    );
+
+
+  if (selected.length === 0) {
+
+    feedback.className =
+      "feedback incorrect";
+
+    feedback.innerHTML =
+      "<strong>" +
+      "Select at least one number set " +
+      "before checking your thinking." +
+      "</strong>";
+
+    return;
+
+  }
+
+
+  if (!sameSets(selected, q.answers)) {
+
+    feedback.className =
+      "feedback incorrect";
+
+    feedback.innerHTML =
+      "<strong>" +
+      "Not quite. Take another look " +
+      "and try again." +
+      "</strong>" +
+      "<br><br>" +
+      "Think about every number set " +
+      "that contains this number. " +
+      "You may need to add a classification, " +
+      "remove one, or both.";
+
+    return;
+
+  }
+
+
+  solved = true;
+
+
+  document.querySelectorAll(
+    "#choices input"
+  ).forEach(input => {
+
+    input.disabled = true;
+
+  });
+
+
+  let chain = "";
+
+
+  q.answers.forEach(
+    (answer, index) => {
+
+      chain +=
+        '<span class="classification">' +
+        answer +
+        "</span>";
+
+
+      if (
+        index <
+        q.answers.length - 1
+      ) {
+
+        chain +=
+          '<span class="arrow">→</span>';
+
+      }
+
+    }
+  );
+
+
+  feedback.className =
+    "feedback correct";
+
+
+  feedback.innerHTML =
+
+    "<strong>" +
+    "This classification works." +
+    "</strong>" +
+
+    '<div class="classification-chain">' +
+    chain +
+    "</div>" +
+
+    '<div class="plc">' +
+
+    "Talk with your PLC about the patterns " +
+    "this activity helped you explore. " +
+    "What are you noticing about the number system?" +
+
+    "</div>" +
+
+    "<br>" +
+
+    '<button class="secondary" ' +
+    'onclick="nextQuestion()">' +
+
+    (
+      current === order.length - 1
+        ? "Finish the Investigation"
+        : "Explore Another Number"
+    ) +
+
+    "</button>";
+
+
+  document.getElementById(
+    "checkButton"
+  ).classList.add("hidden");
+
+}
+
+
+function nextQuestion() {
+
+  if (
+    current <
+    order.length - 1
+  ) {
+
+    current++;
+
+    showQuestion();
+
+  }
+
+  else {
+
+    document.getElementById(
+      "activity"
+    ).classList.add("hidden");
+
+
+    document.getElementById(
+      "finalScreen"
+    ).classList.remove("hidden");
+
+  }
+
+}
+
+
+function restartActivity() {
+
+  current = 0;
+
+  shuffleQuestions();
+
+
+  document.getElementById(
+    "finalScreen"
+  ).classList.add("hidden");
+
+
+  document.getElementById(
+    "activity"
+  ).classList.remove("hidden");
+
+
+  showQuestion();
+
+}
+
+
+shuffleQuestions();
+
+showQuestion();
+
+</script>
+
+</body>
+</html>
