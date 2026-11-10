@@ -1,249 +1,146 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Number System Investigation</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
-      padding: 24px;
-      background: #f7fafc;
-      color: #17324d;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      color: #164f78;
-      margin-bottom: 8px;
-    }
-
-    .directions {
-      line-height: 1.55;
-      margin-bottom: 20px;
-    }
-
-    .progress {
-      font-size: 14px;
-      font-weight: bold;
-      color: #5d6b78;
-      margin-bottom: 8px;
-    }
-
-    .progress-track {
-      width: 100%;
-      height: 8px;
-      background: #dce6ec;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 24px;
-    }
-
-    .progress-bar {
-      height: 100%;
-      background: #43b7c7;
-      width: 0%;
-      transition: width .3s ease;
-    }
-
-    .number-card {
-      background: white;
-      border: 2px solid #d8e3e9;
-      border-radius: 16px;
-      padding: 28px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .small-heading {
-      text-transform: uppercase;
-      font-size: 13px;
-      letter-spacing: 1px;
-      color: #6a7782;
-      font-weight: bold;
-    }
-
-    .number {
-      font-size: 54px;
-      font-weight: bold;
-      margin: 16px 0;
-      color: #164f78;
-    }
-
-    .prompt {
-      color: #5d6b78;
-    }
-
-    .choices {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .choice {
-      background: white;
-      border: 2px solid #d8e3e9;
-      border-radius: 10px;
-      padding: 14px;
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .choice:hover {
-      border-color: #43b7c7;
-    }
-
-    .choice input {
-      width: 19px;
-      height: 19px;
-      cursor: pointer;
-    }
-
-    button {
-      background: #164f78;
-      color: white;
-      border: none;
-      border-radius: 9px;
-      padding: 13px 20px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #103d5e;
-    }
-
-    .secondary {
-      background: #e7f3f5;
-      color: #164f78;
-    }
-
-    .feedback {
-      margin-top: 20px;
-      padding: 20px;
-      border-radius: 12px;
-      background: white;
-      border: 2px solid #d8e3e9;
-      line-height: 1.5;
-    }
-
-    .incorrect {
-      border-color: #e3a548;
-      background: #fffaf1;
-    }
-
-    .correct {
-      border-color: #43b7c7;
-      background: #f0fbfc;
-    }
-
-    .classification-chain {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-      margin: 16px 0 20px;
-    }
-
-    .classification {
-      background: white;
-      border: 1px solid #a9c9d0;
-      border-radius: 8px;
-      padding: 8px 11px;
-      font-weight: bold;
-    }
-
-    .arrow {
-      color: #60727c;
-      font-weight: bold;
-    }
-
-    .plc {
-      margin-top: 16px;
-      padding: 16px;
-      background: #e9f8fa;
-      border-left: 5px solid #43b7c7;
-      font-size: 17px;
-      font-weight: bold;
-      line-height: 1.5;
-    }
-
-    .final {
-      background: white;
-      border: 2px solid #43b7c7;
-      border-radius: 16px;
-      padding: 28px;
-      margin-top: 20px;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    @media (max-width: 650px) {
-      body {
-        padding: 14px;
-      }
-
-      .choices {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .number {
-        font-size: 44px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Number System Investigation</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0; padding: 24px;
+  background: #f7fafc; color: #17324d;
+}
+.container { max-width: 900px; margin: auto; }
+h1 { color: #164f78; margin-bottom: 8px; }
+.directions { line-height: 1.55; margin-bottom: 20px; }
+.progress {
+  font-size: 14px; font-weight: bold;
+  color: #5d6b78; margin-bottom: 8px;
+}
+.progress-track {
+  height: 8px; background: #dce6ec;
+  border-radius: 10px; overflow: hidden;
+  margin-bottom: 24px;
+}
+.progress-bar {
+  height: 100%; width: 0%;
+  background: #43b7c7; transition: width .3s;
+}
+.number-card {
+  background: white; border: 2px solid #d8e3e9;
+  border-radius: 16px; padding: 28px;
+  text-align: center; margin-bottom: 20px;
+}
+.small-heading {
+  text-transform: uppercase; font-size: 13px;
+  letter-spacing: 1px; color: #6a7782;
+  font-weight: bold;
+}
+.number {
+  font-size: 54px; font-weight: bold;
+  margin: 16px 0; color: #164f78;
+}
+.prompt { color: #5d6b78; }
+.choices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px; margin-bottom: 20px;
+}
+.choice {
+  background: white; border: 2px solid #d8e3e9;
+  border-radius: 10px; padding: 14px;
+  display: flex; align-items: center;
+  gap: 9px; cursor: pointer; font-weight: bold;
+}
+.choice:hover { border-color: #43b7c7; }
+.choice input { width: 19px; height: 19px; cursor: pointer; }
+button {
+  background: #164f78; color: white;
+  border: none; border-radius: 9px;
+  padding: 13px 20px; font-size: 16px;
+  font-weight: bold; cursor: pointer;
+}
+button:hover { background: #103d5e; }
+button:focus-visible, input:focus-visible {
+  outline: 3px solid #e3a548;
+  outline-offset: 3px;
+}
+.secondary { background: #e7f3f5; color: #164f78; }
+.feedback {
+  margin-top: 20px; padding: 20px;
+  border-radius: 12px; background: white;
+  border: 2px solid #d8e3e9; line-height: 1.5;
+}
+.incorrect { border-color: #e3a548; background: #fffaf1; }
+.correct { border-color: #43b7c7; background: #f0fbfc; }
+.hint-heading {
+  color: #835416; font-size: 15px;
+  font-weight: bold; margin-bottom: 8px;
+}
+.hint-text { font-size: 16px; line-height: 1.6; }
+.hint-reflection {
+  margin-top: 12px; font-size: 14px;
+  color: #5d5345;
+}
+.classification-chain {
+  display: flex; flex-wrap: wrap;
+  align-items: center; gap: 8px;
+  margin: 16px 0 20px;
+}
+.classification {
+  background: white; border: 1px solid #a9c9d0;
+  border-radius: 8px; padding: 8px 11px;
+  font-weight: bold;
+}
+.arrow { color: #60727c; font-weight: bold; }
+.plc {
+  margin-top: 16px; padding: 16px;
+  background: #e9f8fa;
+  border-left: 5px solid #43b7c7;
+  font-size: 17px; font-weight: bold;
+  line-height: 1.5;
+}
+.final {
+  background: white; border: 2px solid #43b7c7;
+  border-radius: 16px; padding: 28px;
+  margin-top: 20px;
+}
+.hidden { display: none; }
+@media (max-width: 650px) {
+  body { padding: 14px; }
+  .choices { grid-template-columns: 1fr 1fr; }
+  .number { font-size: 44px; }
+}
+</style>
 </head>
-
 <body>
-
 <div class="container">
-
   <h1>Number System Investigation</h1>
-
   <div class="directions">
-    For each number, select <strong>all number sets</strong> to which you
-    think it belongs. Check your thinking and revise your choices as needed.
-    Once your PLC has correctly classified the number, pause to discuss what
-    the example helps you notice about the number system before moving on.
+    For each number, select <strong>all number sets</strong>
+    to which you think it belongs. Check your thinking and
+    revise your choices as needed. If your classification
+    needs revision, use the mathematical feedback to guide
+    your PLC's discussion. Once your PLC has correctly
+    classified the number, pause to discuss what the example
+    helps you notice about the number system before moving on.
   </div>
 
   <div id="activity">
-
     <div class="progress" id="progressText"></div>
-
     <div class="progress-track">
       <div class="progress-bar" id="progressBar"></div>
     </div>
 
     <div class="number-card">
-
-      <div class="small-heading">
-        Explore this number
-      </div>
-
+      <div class="small-heading">Explore this number</div>
       <div class="number" id="numberDisplay"></div>
-
       <div class="prompt">
-        Which number sets contain this number? Select all that apply.
+        Which number sets contain this number?
+        Select all that apply.
       </div>
-
     </div>
 
     <div class="choices" id="choices"></div>
@@ -252,522 +149,581 @@
       Check My Thinking
     </button>
 
-    <div id="feedback" class="feedback hidden"></div>
-
+    <div id="feedback" class="feedback hidden"
+         role="status" aria-live="polite"></div>
   </div>
 
-
   <div id="finalScreen" class="final hidden">
-
     <h2>Talk with Your PLC</h2>
-
-    <p style="font-size:20px; line-height:1.5;">
+    <p style="font-size:20px;line-height:1.5;">
       <strong>
-        Talk with your PLC about the patterns this activity helped you explore.
-        What are you noticing about the number system?
+        Talk with your PLC about the patterns this activity
+        helped you explore. What are you noticing about
+        the number system?
       </strong>
     </p>
-
-    <p>
-      Be ready to share what your group notices with the class.
-    </p>
-
+    <p>Be ready to share what your group notices with the class.</p>
     <button class="secondary" onclick="restartActivity()">
       Explore the Numbers Again
     </button>
-
   </div>
-
 </div>
 
-
 <script>
+"use strict";
 
 const sets = [
-  "Natural",
-  "Whole",
-  "Integer",
-  "Rational",
-  "Irrational",
-  "Real",
-  "Pure Imaginary",
-  "Imaginary",
-  "Complex"
+  "Natural", "Whole", "Integer",
+  "Rational", "Irrational", "Real",
+  "Pure Imaginary", "Imaginary", "Complex"
 ];
-
 
 const questions = [
-
   {
     number: "7",
-    answers: [
-      "Natural",
-      "Whole",
-      "Integer",
-      "Rational",
-      "Real",
-      "Complex"
-    ]
+    answers: ["Natural","Whole","Integer","Rational","Real","Complex"],
+    idea: "positiveInteger"
   },
-
   {
     number: "0",
-    answers: [
-      "Whole",
-      "Integer",
-      "Rational",
-      "Real",
-      "Complex"
-    ]
+    answers: ["Whole","Integer","Rational","Real","Complex"],
+    idea: "zero"
   },
-
   {
     number: "−4",
-    answers: [
-      "Integer",
-      "Rational",
-      "Real",
-      "Complex"
-    ]
+    answers: ["Integer","Rational","Real","Complex"],
+    idea: "negativeInteger"
   },
-
   {
     number: "3/5",
-    answers: [
-      "Rational",
-      "Real",
-      "Complex"
-    ]
+    answers: ["Rational","Real","Complex"],
+    idea: "fraction"
   },
-
   {
     number: "0.75",
-    answers: [
-      "Rational",
-      "Real",
-      "Complex"
-    ]
+    answers: ["Rational","Real","Complex"],
+    idea: "terminating"
   },
-
   {
     number: "0.666…",
-    answers: [
-      "Rational",
-      "Real",
-      "Complex"
-    ]
+    answers: ["Rational","Real","Complex"],
+    idea: "repeating"
   },
-
   {
     number: "√49",
-    answers: [
-      "Natural",
-      "Whole",
-      "Integer",
-      "Rational",
-      "Real",
-      "Complex"
-    ]
+    answers: ["Natural","Whole","Integer","Rational","Real","Complex"],
+    idea: "perfectSquare"
   },
-
   {
     number: "√2",
-    answers: [
-      "Irrational",
-      "Real",
-      "Complex"
-    ]
+    answers: ["Irrational","Real","Complex"],
+    idea: "nonPerfectSquare"
   },
-
   {
     number: "π",
-    answers: [
-      "Irrational",
-      "Real",
-      "Complex"
-    ]
+    answers: ["Irrational","Real","Complex"],
+    idea: "pi"
   },
-
   {
     number: "−√25",
-    answers: [
-      "Integer",
-      "Rational",
-      "Real",
-      "Complex"
-    ]
+    answers: ["Integer","Rational","Real","Complex"],
+    idea: "negativeRoot"
   },
-
   {
     number: "√−9",
-    answers: [
-      "Pure Imaginary",
-      "Imaginary",
-      "Complex"
-    ]
+    answers: ["Pure Imaginary","Imaginary","Complex"],
+    idea: "negativeRadicand"
   },
-
   {
     number: "−5i",
-    answers: [
-      "Pure Imaginary",
-      "Imaginary",
-      "Complex"
-    ]
+    answers: ["Pure Imaginary","Imaginary","Complex"],
+    idea: "pureImaginary"
   },
-
   {
     number: "3 + 2i",
-    answers: [
-      "Imaginary",
-      "Complex"
-    ]
+    answers: ["Imaginary","Complex"],
+    idea: "nonrealComplex"
   },
-
   {
     number: "4 + 0i",
-    answers: [
-      "Natural",
-      "Whole",
-      "Integer",
-      "Rational",
-      "Real",
-      "Complex"
-    ]
+    answers: ["Natural","Whole","Integer","Rational","Real","Complex"],
+    idea: "zeroImaginary"
   },
-
   {
     number: "−2.5",
-    answers: [
-      "Rational",
-      "Real",
-      "Complex"
-    ]
+    answers: ["Rational","Real","Complex"],
+    idea: "negativeDecimal"
   }
-
 ];
 
+/*
+  Question-specific conceptual guidance.
+  These are not answer keys. They direct students
+  toward the mathematical structure of each number.
+*/
+const conceptHints = {
+  positiveInteger: [
+    "Think about the nested number sets containing positive counting numbers.",
+    "If a number belongs to a smaller set, which larger sets must also contain it?",
+    "Trace the inclusion relationships from counting numbers through the real and complex systems."
+  ],
+  zero: [
+    "What is the difference between natural and whole numbers in the convention used in class?",
+    "Consider whether zero is a counting number and whether it can be expressed as a ratio of integers.",
+    "Start with the smallest set that contains zero, then follow the nested sets outward."
+  ],
+  negativeInteger: [
+    "How does the negative sign affect membership in the counting and whole-number sets?",
+    "Compare the definitions of whole numbers and integers. Which permits negative values?",
+    "Think about whether a negative integer can be written as a fraction with an integer denominator."
+  ],
+  fraction: [
+    "What does the notation tell you about how this number can be represented?",
+    "Does a ratio of integers always produce an integer? Consider the relationship between rational numbers and integers.",
+    "Use the definition of rational numbers, then consider the larger sets containing rational numbers."
+  ],
+  terminating: [
+    "What can a terminating decimal tell you about the number's representation?",
+    "Can this decimal be written as a ratio of integers? Does that make it a whole number?",
+    "Consider the difference between being rational and being an integer, then examine the larger sets."
+  ],
+  repeating: [
+    "Is every decimal that continues indefinitely irrational?",
+    "Compare a repeating decimal with a nonterminating, nonrepeating decimal.",
+    "Investigate whether the repeating pattern can be represented as a fraction of integers."
+  ],
+  perfectSquare: [
+    "Evaluate the square root before classifying the resulting value.",
+    "What distinguishes a perfect square from a number whose square root is irrational?",
+    "After evaluating the expression, trace the nested number sets that contain its value."
+  ],
+  nonPerfectSquare: [
+    "Does every square root belong to the same number set?",
+    "Consider whether the radicand is a perfect square and whether the result can be a ratio of integers.",
+    "Distinguish an irrational real number from a nonreal complex number."
+  ],
+  pi: [
+    "Think about the decimal representation of this mathematical constant.",
+    "What distinguishes a nonrepeating, nonterminating decimal from a repeating decimal?",
+    "Consider whether the number can be expressed as a ratio of integers and which larger sets contain it."
+  ],
+  negativeRoot: [
+    "Evaluate the square root first. Then consider what the negative sign outside the radical does.",
+    "How does the resulting sign affect membership in natural and whole numbers?",
+    "Distinguish a negative real value from a number involving a nonzero imaginary component."
+  ],
+  negativeRadicand: [
+    "Think about what happens when the number inside a square root is negative.",
+    "Can the result be represented on the real number line? Consider the role of i.",
+    "Compare a number containing only a nonzero imaginary term with one containing both real and imaginary terms."
+  ],
+  pureImaginary: [
+    "What does the symbol i tell you about this number?",
+    "Can the number be written in the form a + bi? What is the real component?",
+    "Consider how pure imaginary numbers relate to imaginary and complex numbers."
+  ],
+  nonrealComplex: [
+    "Identify the real component and the coefficient of i.",
+    "How is a number with both a nonzero real component and a nonzero imaginary component classified?",
+    "Compare the conditions for pure imaginary numbers with those for other nonreal complex numbers."
+  ],
+  zeroImaginary: [
+    "Does writing a number with i automatically make its value nonreal?",
+    "Evaluate the imaginary term. What happens when its coefficient is zero?",
+    "Classify the resulting value rather than relying only on the symbols appearing in the expression."
+  ],
+  negativeDecimal: [
+    "Consider whether a negative decimal can be rational.",
+    "Can a terminating negative decimal be represented as a ratio of integers?",
+    "Distinguish rational numbers from integers, then consider their inclusion in larger sets."
+  ]
+};
+
+/*
+  Misconception-sensitive guidance.
+  Each entry has three levels of increasing specificity.
+  The third level still requires mathematical reasoning.
+*/
+const misconceptionHints = {
+  nonrealForReal: [
+    "Look again at the distinction between real and imaginary numbers. What role does i play?",
+    "A number can be complex without having a nonzero imaginary component. How does that affect your choices?",
+    "Write the value as a + bi. Examine whether b is zero before deciding about imaginary classifications."
+  ],
+  realForNonreal: [
+    "Consider whether a number involving i can also be real.",
+    "What happens when the coefficient of i is nonzero? Can the result lie on the real number line?",
+    "Use a + bi to distinguish the real component from the entire number's membership in the real set."
+  ],
+  irrationalVsRational: [
+    "Revisit the difference between rational and irrational numbers.",
+    "Does the value have a representation as a ratio of integers? Think about decimals, roots, or the expression's value.",
+    "Rational and irrational are mutually exclusive classifications within the real numbers. Determine which definition applies."
+  ],
+  naturalWhole: [
+    "Think about the difference between counting numbers and whole numbers.",
+    "Does the value meet the definition of a nonnegative integer? What about a positive counting number?",
+    "Compare the conditions for Natural, Whole, and Integer rather than treating the three labels as interchangeable."
+  ],
+  integerBoundary: [
+    "Consider whether the value is an integer rather than simply rational.",
+    "Evaluate the number first. Does it have a fractional part?",
+    "Remember that integers include negative and positive whole-valued numbers, while rational numbers include more than integers."
+  ],
+  pureImaginaryBoundary: [
+    "Compare imaginary numbers with pure imaginary numbers.",
+    "What must the real component equal for a number to be pure imaginary?",
+    "Write the number as a + bi and examine a. Is the real component zero?"
+  ],
+  missingComplex: [
+    "Consider how the complex number system relates to the other sets.",
+    "Can the number be written in the form a + bi, including when one component is zero?",
+    "Remember that the complex number system contains both real and nonreal numbers."
+  ],
+  missingReal: [
+    "Think about whether the value can be placed on the real number line.",
+    "How are rational and irrational numbers related to the real number system?",
+    "If the value has no nonzero imaginary component, reconsider the larger set containing it."
+  ],
+  missingRational: [
+    "Think about whether this value can be expressed as a ratio of integers.",
+    "Do integers, fractions, and terminating or repeating decimals have anything in common?",
+    "Consider the definition a/b, where a and b are integers and b is not zero."
+  ],
+  missingIrrational: [
+    "Consider what would make a real number irrational.",
+    "Can this value be expressed exactly as a ratio of integers?",
+    "Investigate whether its decimal representation terminates, repeats, or does neither."
+  ],
+  missingInteger: [
+    "Evaluate the value and examine whether it has a fractional part.",
+    "Does being negative prevent a whole-valued number from being an integer?",
+    "Compare the value with the integers on a number line, including those below zero."
+  ],
+  missingWholeNatural: [
+    "Think about the smaller sets nested inside the integers.",
+    "Does this value meet the definition of a whole number or a positive counting number?",
+    "Trace the nesting of Natural, Whole, and Integer, paying attention to zero."
+  ],
+  missingImaginary: [
+    "Think about the meaning of a nonzero imaginary component.",
+    "How do numbers with nonzero coefficients of i fit into the imaginary and complex sets?",
+    "Distinguish the broad imaginary classification from the more restrictive pure imaginary classification."
+  ],
+  missingPureImaginary: [
+    "Examine the real component of the expression.",
+    "What happens when a number contains a nonzero imaginary term but no real component?",
+    "Compare a + bi with the special case a = 0 and b nonzero."
+  ]
+};
 
 let order = [];
 let current = 0;
 let solved = false;
+let previousIssue = null;
+let issueLevel = 0;
+let issueHistory = {};
 
+/*
+  A deterministic priority order chooses one relevant
+  misconception at a time. When that issue is corrected,
+  feedback moves to the next remaining issue.
+*/
+function identifyIssue(q, selected) {
+  const correct = q.answers;
+  const has = set => selected.includes(set);
+  const should = set => correct.includes(set);
+
+  const extra = set => has(set) && !should(set);
+  const missing = set => !has(set) && should(set);
+
+  if (should("Real") &&
+      (extra("Imaginary") || extra("Pure Imaginary"))) {
+    return "nonrealForReal";
+  }
+
+  if (!should("Real") &&
+      ["Real","Rational","Irrational","Integer","Whole","Natural"]
+        .some(extra)) {
+    return "realForNonreal";
+  }
+
+  if (extra("Irrational") || extra("Rational")) {
+    return "irrationalVsRational";
+  }
+
+  if (extra("Natural") || extra("Whole")) {
+    return "naturalWhole";
+  }
+
+  if (extra("Integer")) {
+    return "integerBoundary";
+  }
+
+  if (extra("Pure Imaginary")) {
+    return "pureImaginaryBoundary";
+  }
+
+  if (missing("Complex")) {
+    return "missingComplex";
+  }
+
+  if (missing("Real")) {
+    return "missingReal";
+  }
+
+  if (missing("Rational")) {
+    return "missingRational";
+  }
+
+  if (missing("Irrational")) {
+    return "missingIrrational";
+  }
+
+  if (missing("Integer")) {
+    return "missingInteger";
+  }
+
+  if (missing("Natural") || missing("Whole")) {
+    return "missingWholeNatural";
+  }
+
+  if (missing("Imaginary")) {
+    return "missingImaginary";
+  }
+
+  if (missing("Pure Imaginary")) {
+    return "missingPureImaginary";
+  }
+
+  return "concept";
+}
+
+function getHint(q, issue) {
+  if (issue !== previousIssue) {
+    previousIssue = issue;
+    issueLevel = issueHistory[issue] || 0;
+  }
+
+  const level = Math.min(issueLevel, 2);
+  const conceptual = conceptHints[q.idea][level];
+
+  let targeted;
+
+  if (issue === "concept") {
+    targeted = conceptual;
+  } else {
+    targeted = misconceptionHints[issue][level];
+  }
+
+  issueLevel = Math.min(issueLevel + 1, 2);
+  issueHistory[issue] = issueLevel;
+
+  return {
+    level: level + 1,
+    conceptual,
+    targeted
+  };
+}
 
 function shuffleQuestions() {
-
   order = [...questions];
 
   for (let i = order.length - 1; i > 0; i--) {
-
     const j = Math.floor(Math.random() * (i + 1));
-
-    [order[i], order[j]] =
-      [order[j], order[i]];
-
+    [order[i], order[j]] = [order[j], order[i]];
   }
-
 }
 
-
 function buildChoices() {
-
-  const container =
-    document.getElementById("choices");
-
+  const container = document.getElementById("choices");
   container.innerHTML = "";
 
   sets.forEach(set => {
-
-    const label =
-      document.createElement("label");
-
+    const label = document.createElement("label");
     label.className = "choice";
 
-
-    const checkbox =
-      document.createElement("input");
-
+    const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.value = set;
 
-
-    const text =
-      document.createElement("span");
-
+    const text = document.createElement("span");
     text.textContent = set;
-
 
     label.appendChild(checkbox);
     label.appendChild(text);
-
     container.appendChild(label);
-
   });
-
 }
-
 
 function showQuestion() {
-
   solved = false;
+  previousIssue = null;
+  issueLevel = 0;
+  issueHistory = {};
 
   const q = order[current];
 
+  document.getElementById("numberDisplay").textContent = q.number;
+  document.getElementById("progressText").textContent =
+    "Number " + (current + 1) + " of " + order.length;
 
-  document.getElementById(
-    "numberDisplay"
-  ).textContent = q.number;
+  document.getElementById("progressBar").style.width =
+    ((current + 1) / order.length * 100) + "%";
 
+  const feedback = document.getElementById("feedback");
+  feedback.className = "feedback hidden";
+  feedback.replaceChildren();
 
-  document.getElementById(
-    "progressText"
-  ).textContent =
-    "Number " +
-    (current + 1) +
-    " of " +
-    order.length;
-
-
-  document.getElementById(
-    "progressBar"
-  ).style.width =
-    ((current + 1) /
-      order.length *
-      100) +
-    "%";
-
-
-  document.getElementById(
-    "feedback"
-  ).className =
-    "feedback hidden";
-
-
-  document.getElementById(
-    "feedback"
-  ).innerHTML = "";
-
-
-  document.getElementById(
-    "checkButton"
-  ).classList.remove("hidden");
-
-
+  document.getElementById("checkButton").classList.remove("hidden");
   buildChoices();
-
 }
-
 
 function sameSets(selected, correct) {
-
-  return (
-    selected.length === correct.length &&
-    selected.every(
-      item => correct.includes(item)
-    )
-  );
-
+  return selected.length === correct.length &&
+    selected.every(item => correct.includes(item));
 }
 
+function addText(parent, tag, content, className) {
+  const element = document.createElement(tag);
+  element.textContent = content;
+  if (className) element.className = className;
+  parent.appendChild(element);
+  return element;
+}
+
+function showIncorrect(q, selected) {
+  const feedback = document.getElementById("feedback");
+  feedback.className = "feedback incorrect";
+  feedback.replaceChildren();
+
+  const issue = identifyIssue(q, selected);
+  const hint = getHint(q, issue);
+
+  addText(feedback, "div", "Let's reconsider our thinking",
+          "hint-heading");
+
+  addText(feedback, "p", hint.targeted, "hint-text");
+
+  /*
+    On the first hint, the issue-specific question is enough.
+    On later hints, add a second question about the
+    mathematical structure of the particular expression.
+  */
+  if (hint.level >= 2 && hint.conceptual !== hint.targeted) {
+    addText(feedback, "p", hint.conceptual, "hint-text");
+  }
+
+  addText(
+    feedback,
+    "div",
+    "Discuss your reasoning with your PLC, revise your selections, and check again.",
+    "hint-reflection"
+  );
+}
+
+function showCorrect(q) {
+  const feedback = document.getElementById("feedback");
+  feedback.className = "feedback correct";
+  feedback.replaceChildren();
+
+  addText(feedback, "strong", "This classification works.");
+
+  const chain = document.createElement("div");
+  chain.className = "classification-chain";
+
+  q.answers.forEach((answer, index) => {
+    addText(chain, "span", answer, "classification");
+
+    if (index < q.answers.length - 1) {
+      addText(chain, "span", "→", "arrow");
+    }
+  });
+
+  feedback.appendChild(chain);
+
+  addText(
+    feedback,
+    "div",
+    "Talk with your PLC about the patterns this activity helped you explore. What are you noticing about the number system?",
+    "plc"
+  );
+
+  const next = document.createElement("button");
+  next.className = "secondary";
+  next.style.marginTop = "20px";
+  next.textContent =
+    current === order.length - 1
+      ? "Finish the Investigation"
+      : "Explore Another Number";
+
+  next.addEventListener("click", nextQuestion);
+  feedback.appendChild(next);
+
+  document.getElementById("checkButton").classList.add("hidden");
+}
 
 function checkAnswer() {
-
   if (solved) return;
-
 
   const q = order[current];
 
+  const selected = Array.from(
+    document.querySelectorAll("#choices input:checked")
+  ).map(input => input.value);
 
-  const selected =
-    Array.from(
-      document.querySelectorAll(
-        "#choices input:checked"
-      )
-    ).map(
-      input => input.value
-    );
-
-
-  const feedback =
-    document.getElementById(
-      "feedback"
-    );
-
+  const feedback = document.getElementById("feedback");
 
   if (selected.length === 0) {
+    feedback.className = "feedback incorrect";
+    feedback.replaceChildren();
 
-    feedback.className =
-      "feedback incorrect";
-
-    feedback.innerHTML =
-      "<strong>" +
-      "Select at least one number set " +
-      "before checking your thinking." +
-      "</strong>";
-
+    addText(
+      feedback,
+      "strong",
+      "Select at least one number set before checking your thinking."
+    );
     return;
-
   }
-
 
   if (!sameSets(selected, q.answers)) {
-
-    feedback.className =
-      "feedback incorrect";
-
-    feedback.innerHTML =
-      "<strong>" +
-      "Not quite. Take another look " +
-      "and try again." +
-      "</strong>" +
-      "<br><br>" +
-      "Think about every number set " +
-      "that contains this number. " +
-      "You may need to add a classification, " +
-      "remove one, or both.";
-
+    showIncorrect(q, selected);
     return;
-
   }
-
 
   solved = true;
 
-
-  document.querySelectorAll(
-    "#choices input"
-  ).forEach(input => {
-
+  document.querySelectorAll("#choices input").forEach(input => {
     input.disabled = true;
-
   });
 
-
-  let chain = "";
-
-
-  q.answers.forEach(
-    (answer, index) => {
-
-      chain +=
-        '<span class="classification">' +
-        answer +
-        "</span>";
-
-
-      if (
-        index <
-        q.answers.length - 1
-      ) {
-
-        chain +=
-          '<span class="arrow">→</span>';
-
-      }
-
-    }
-  );
-
-
-  feedback.className =
-    "feedback correct";
-
-
-  feedback.innerHTML =
-
-    "<strong>" +
-    "This classification works." +
-    "</strong>" +
-
-    '<div class="classification-chain">' +
-    chain +
-    "</div>" +
-
-    '<div class="plc">' +
-
-    "Talk with your PLC about the patterns " +
-    "this activity helped you explore. " +
-    "What are you noticing about the number system?" +
-
-    "</div>" +
-
-    "<br>" +
-
-    '<button class="secondary" ' +
-    'onclick="nextQuestion()">' +
-
-    (
-      current === order.length - 1
-        ? "Finish the Investigation"
-        : "Explore Another Number"
-    ) +
-
-    "</button>";
-
-
-  document.getElementById(
-    "checkButton"
-  ).classList.add("hidden");
-
+  showCorrect(q);
 }
-
 
 function nextQuestion() {
+  if (!solved) return;
 
-  if (
-    current <
-    order.length - 1
-  ) {
-
+  if (current < order.length - 1) {
     current++;
-
     showQuestion();
-
+  } else {
+    document.getElementById("activity").classList.add("hidden");
+    document.getElementById("finalScreen").classList.remove("hidden");
   }
-
-  else {
-
-    document.getElementById(
-      "activity"
-    ).classList.add("hidden");
-
-
-    document.getElementById(
-      "finalScreen"
-    ).classList.remove("hidden");
-
-  }
-
 }
-
 
 function restartActivity() {
-
   current = 0;
-
   shuffleQuestions();
 
-
-  document.getElementById(
-    "finalScreen"
-  ).classList.add("hidden");
-
-
-  document.getElementById(
-    "activity"
-  ).classList.remove("hidden");
-
+  document.getElementById("finalScreen").classList.add("hidden");
+  document.getElementById("activity").classList.remove("hidden");
 
   showQuestion();
-
 }
 
-
 shuffleQuestions();
-
 showQuestion();
-
 </script>
-
 </body>
 </html>
